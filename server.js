@@ -35,7 +35,7 @@ fastify.post('/github-event', async (request, reply) => {
                     { name: 'Mensagem', value: `\`\`\`${mensagemCommit}\`\`\`` },
                     { name: 'Data', value: `${dataFormatada} às ${horaFormatada}`, inline: false }
                 ],
-                footer: { text: 'GitHub Notifier Bot' },
+                footer: { text: 'Status Commit DS - Desenvolvido por Jottax' },
                 timestamp: new Date()
             }]
         };
