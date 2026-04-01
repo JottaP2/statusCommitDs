@@ -7,7 +7,7 @@ fastify.post('/github-event', async (request, reply) => {
     const payload = request.body;
 
     // 1. Filtro de Segurança e Branch
-    // Verifica se é um push e se é na main (o GitHub envia refs/heads/main)
+    // Verifica se é um push e se é na main (o GitHub envia refs/heads/main) teste
     if (payload.ref === 'refs/heads/main' && payload.head_commit) {
 
         const repoName = payload.repository.name;
