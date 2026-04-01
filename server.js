@@ -7,9 +7,11 @@ if (!DISCORD_WEBHOOK_URL) {
 
 fastify.post('/github-event', async (request, reply) => {
     const payload = request.body;
+    const branchRef = payload.ref;
+    const branchName = branchRef?.replace('refs/heads/', '');
+    const branchPermitida = branchName === 'main' || branchName === 'dev';
 
-    if (payload.ref === 'refs/heads/main' && payload.head_commit) {
-
+    if (branchPermitida && payload.head_commit) {
         const repoName = payload.repository.name;
         const commit = payload.head_commit;
         const autor = commit.author.name;
@@ -23,13 +25,12 @@ fastify.post('/github-event', async (request, reply) => {
             timeZone: 'America/Maceio'
         });
 
-
         const discordPayload = {
             embeds: [{
                 title: `🚀 Novo Push no Repositório: ${repoName}`,
                 color: 0x5865F2,
                 fields: [
-                    { name: 'Branch', value: '`main`', inline: true },
+                    { name: 'Branch', value: `\`${branchName}\``, inline: true },
                     { name: 'Quem commitou', value: `**${autor}**`, inline: true },
                     { name: 'Mensagem', value: `\`\`\`${mensagemCommit}\`\`\`` },
                     { name: 'Data', value: `${dataFormatada} às ${horaFormatada}`, inline: false }
