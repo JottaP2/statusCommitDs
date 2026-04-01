@@ -16,7 +16,6 @@ fastify.post('/github-event', async (request, reply) => {
         const commit = payload.head_commit;
         const autor = commit.author.name;
         const mensagemCommit = commit.message;
-
         const dataObj = new Date(commit.timestamp);
         const dataFormatada = dataObj.toLocaleDateString('pt-BR');
         const horaFormatada = dataObj.toLocaleTimeString('pt-BR', {
