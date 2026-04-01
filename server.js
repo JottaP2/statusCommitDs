@@ -15,7 +15,6 @@ fastify.post('/github-event', async (request, reply) => {
         const autor = commit.author.name;
         const mensagemCommit = commit.message;
 
-        // 2. Formatação de Data e Hora (Padrão BR)
         const dataObj = new Date(commit.timestamp);
         const dataFormatada = dataObj.toLocaleDateString('pt-BR');
         const horaFormatada = dataObj.toLocaleTimeString('pt-BR', {
